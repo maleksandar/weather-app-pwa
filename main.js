@@ -16,16 +16,26 @@ function getResults (query) {
   fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
     .then(weather => {
       return weather.json();
-    }).then(displayResults)
-      .catch(displayOfflineData);
+    })
+    .then(displayResults)
+    .catch(displayOfflineData)
 }
 
 function displayResults (weather) {
-  let mainElement = document.querySelector('.main');
   let offlineDataElement = document.querySelector('.offline');
+  offlineDataElement.style.visibility="hidden";
+  
+  let errorMessageElement = document.querySelector('.error');
+  if(weather instanceof Error || weather.cod === '404' || weather.cod === '400') {
+    errorMessageElement.style.visibility="visible";
+    let mainElement = document.querySelector('.main');
+    mainElement.style.visibility="hidden";
+    return;
+  }
 
-  mainElement.style.display="block";
-  offlineDataElement.style.display="none";
+  errorMessageElement.style.visibility="hidden";
+  let mainElement = document.querySelector('.main');
+  mainElement.style.visibility="visible";
 
   let cityElement = document.querySelector('.location .city');
   cityElement.innerText = `${weather.name}, ${weather.sys.country}`;
@@ -45,10 +55,10 @@ function displayResults (weather) {
 
 function displayOfflineData (weather) {
   let offlineDataElement = document.querySelector('.offline');
-  let mainElement = document.querySelector('.main');
+  offlineDataElement.style.visibility="visible";
 
-  offlineDataElement.style.display="block";
-  mainElement.style.display="none";
+  let mainElement = document.querySelector('.main');
+  mainElement.style.visibility="hidden";
 }
 
 function dateBuilder (d) {

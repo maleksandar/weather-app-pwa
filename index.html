@@ -18,21 +18,25 @@
   <div class="app-wrap">
     <header>
       <input type="text" autocomplete="off" class="search-box" placeholder="Search for a city..." />
+      <div class="offline">
+        App is currently offline. Try reloading later!
+      </div>
+      <div class="error">
+        City not found. Check your spelling and try again!
+      </div>
     </header>
+
     <main class="main">
       <section class="location">
-        <div class="city">No Internet connection</div>
-        <div class="date">Try reloading a page a bit later...</div>
+        <div class="city"> - </div>
+        <div class="date"> - </div>
       </section>
       <div class="current">
-        <div class="temperature">-<span>°c</span></div>
-        <div class="weather">(no internet connection)</div>
-        <div class="high-low">-°c / -°c</div>
+        <div class="temperature"> - <span>°c</span></div>
+        <div class="weather"> - </div>
+        <div class="high-low"> -°c / -°c</div>
       </div>
     </main>
-    <div class="offline">
-      App is currently offline. Try reloading later!
-    </div>
   </div>
 </body>
 </html>
