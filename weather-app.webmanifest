@@ -2,6 +2,13 @@
   "name": "WeatherApp Progressive Web App",
   "short_name": "weather-app",
   "description": "Progressive Web App that current weather",
+  "icons": [
+    {
+        "src": "icon.png",
+        "sizes": "512x512",
+        "type": "image/png"
+    }
+  ],
   "start_url": "/index.html",
   "display": "fullscreen",
   "theme_color": "#B12A34",
