@@ -6,25 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weather App</title>
   <link rel="stylesheet" href="main.css">
-
+  <link rel="shortcut icon" href="favicon.ico">
+	<link rel="manifest" href="weather-app.webmanifest">
+	<script src="main.js" defer></script>
 </head>
 <body>
   <div class="app-wrap">
     <header>
       <input type="text" autocomplete="off" class="search-box" placeholder="Search for a city..." />
     </header>
-    <main>
+    <main class="main">
       <section class="location">
-        <div class="city">Belgrade, RS</div>
-        <div class="date">loading date...</div>
+        <div class="city">No Internet connection</div>
+        <div class="date">Try reloading a page a bit later...</div>
       </section>
       <div class="current">
         <div class="temperature">-<span>°c</span></div>
-        <div class="weather">loading...</div>
+        <div class="weather">(no internet connection)</div>
         <div class="high-low">-°c / -°c</div>
       </div>
     </main>
+    <div class="offline">
+      App is currently offline. Try reloading later!
+    </div>
   </div>
-  <script src="main.js"></script>
 </body>
 </html>

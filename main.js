@@ -16,10 +16,17 @@ function getResults (query) {
   fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
     .then(weather => {
       return weather.json();
-    }).then(displayResults);
+    }).then(displayResults)
+      .catch(displayOfflineData);
 }
 
 function displayResults (weather) {
+  let mainElement = document.querySelector('.main');
+  let offlineDataElement = document.querySelector('.offline');
+
+  mainElement.style.display="block";
+  offlineDataElement.style.display="none";
+
   let cityElement = document.querySelector('.location .city');
   cityElement.innerText = `${weather.name}, ${weather.sys.country}`;
 
@@ -36,6 +43,14 @@ function displayResults (weather) {
   highLowElement.innerText = `${Math.round(weather.main.temp_min)}°c / ${Math.round(weather.main.temp_max)}°c`;
 }
 
+function displayOfflineData (weather) {
+  let offlineDataElement = document.querySelector('.offline');
+  let mainElement = document.querySelector('.main');
+
+  offlineDataElement.style.display="block";
+  mainElement.style.display="none";
+}
+
 function dateBuilder (d) {
   let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -50,3 +65,7 @@ function dateBuilder (d) {
 
 // init results
 getResults('Belgrade');
+// Registering Service Worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
